@@ -16,11 +16,13 @@ class _InputFormViewState extends State<InputFormView> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   Product? product;
+  bool isUpdate = false;
 
   @override
   void initState() {
     product = context.read<ProductProvider>().productSelected;
     if (product != null) {
+      isUpdate = true;
       nameController.text = product!.name ?? "";
       imageController.text = product!.imageUrl ?? "";
       descriptionController.text = product!.description ?? "";
@@ -109,18 +111,32 @@ class _InputFormViewState extends State<InputFormView> {
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
                 onPressed: () {
-                  context
-                      .read<ProductProvider>()
-                      .updateProducts(
-                        id: product!.id!,
-                        name: nameController.text,
-                        imageUrl: imageController.text,
-                        description: descriptionController.text,
-                        price: priceController.text,
-                      )
-                      .then(
-                        (value) => Navigator.pop(context),
-                      );
+                  if (isUpdate == true) {
+                    context
+                        .read<ProductProvider>()
+                        .updateProducts(
+                          id: product!.id!,
+                          name: nameController.text,
+                          imageUrl: imageController.text,
+                          description: descriptionController.text,
+                          price: priceController.text,
+                        )
+                        .then(
+                          (value) => Navigator.pop(context),
+                        );
+                  } else {
+                    context
+                        .read<ProductProvider>()
+                        .addProducts(
+                          name: nameController.text,
+                          imageUrl: imageController.text,
+                          description: descriptionController.text,
+                          price: priceController.text,
+                        )
+                        .then(
+                          (value) => Navigator.pop(context),
+                        );
+                  }
                 },
                 child: Text("Save"),
               ),
