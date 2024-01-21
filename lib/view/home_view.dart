@@ -14,7 +14,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
   fetchProducts() async {
     await context.read<ProductProvider>().getProducts();
   }
@@ -56,103 +55,107 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) => Container(
-                height: 150,
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(
-                  vertical: 4,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors
-                      .primaries[Random().nextInt(Colors.primaries.length)]
-                      .shade50,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 2,
-                      spreadRadius: 0,
-                      offset: Offset(1, 1),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Center(
-                        child: CachedNetworkImage(
-                          imageUrl:
-                          "https://static0.xdaimages.com/wordpress/wp-content/uploads/2023/09/iphone-15-pro.png",
-                          placeholder: (context, url) =>
-                              CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
+            child: Consumer<ProductProvider>(
+              builder: (context, provider, child) => ListView.builder(
+                itemCount: provider.products.length,
+                itemBuilder: (context, index) => Container(
+                  height: 150,
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors
+                        .primaries[Random().nextInt(Colors.primaries.length)]
+                        .shade50,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 2,
+                        spreadRadius: 0,
+                        offset: Offset(1, 1),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Center(
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                provider.products[index].imageUrl??"",
+                            placeholder: (context, url) =>
+                                CircularProgressIndicator(),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "iPhone 15 Pro max",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text("description"),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "4300฿",
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FontStyle.italic,
-                                  ),
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "iPhone 15 Pro max",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.delete,
-                                        color: Colors.red,
-                                        size: 15,
-                                      ),
+                              ),
+                              Text("description"),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "4300฿",
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FontStyle.italic,
                                     ),
-                                    IconButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => InputFormView(),
-                                          ),
-                                        );
-                                      },
-                                      icon: Icon(
-                                        Icons.edit,
-                                        size: 15,
+                                  ),
+                                  Row(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                          size: 15,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ],
+                                      IconButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  InputFormView(),
+                                            ),
+                                          );
+                                        },
+                                        icon: Icon(
+                                          Icons.edit,
+                                          size: 15,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

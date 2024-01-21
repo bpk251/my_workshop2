@@ -14,6 +14,7 @@ class ProductProvider with ChangeNotifier {
           (i) => Product.fromJson(i),
         ),
       );
+      notifyListeners();
     }
 
   }
