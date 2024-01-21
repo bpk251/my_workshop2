@@ -55,35 +55,50 @@ class _AppViewState extends State<AppView> {
         ],
       ),
       drawer: Drawer(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 100,
-              width: 100,
-              margin: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.black12,
-                shape: BoxShape.circle,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 54),
+              Container(
+                height: 150,
+                width: 150,
+                decoration: BoxDecoration(
+                  color: Colors.black12,
+                  shape: BoxShape.circle,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(90),
+                  child: Image.network(
+                    "https://files.vogue.co.th/uploads/intro-1499809511.jpg",
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Text("Menu1"),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Text("Menu2"),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Text("Menu3"),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Text("Menu4"),
-            ),
-          ],
+              Text(
+                "robert downey jr",
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(height: 32),
+              TextButton(
+                onPressed: () {},
+                child: Text("Menu1"),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text("Menu2"),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text("Menu3"),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text("Menu4"),
+              ),
+            ],
+          ),
         ),
       ),
       body: pages[visit],

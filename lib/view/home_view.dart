@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -44,14 +45,11 @@ class HomeView extends StatelessWidget {
                 height: 150,
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.symmetric(
-                  horizontal: 16,
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors
-                      .primaries[Random().nextInt(Colors.primaries.length)]
-                      .shade50,
+                  color: Colors.primaries[Random().nextInt(Colors.primaries.length)].shade50,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.05),
@@ -64,13 +62,18 @@ class HomeView extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Image.network(
-                        "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-7inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692845702708",
-                        fit: BoxFit.cover,
-                        height: 150,
+                      flex: 1,
+                      child: Center(
+                        child: CachedNetworkImage(
+                          imageUrl: "https://static0.xdaimages.com/wordpress/wp-content/uploads/2023/09/iphone-15-pro.png",
+
+                          placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(Icons.error),
+                        ),
                       ),
                     ),
                     Expanded(
+                      flex: 2,
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Column(
@@ -80,7 +83,7 @@ class HomeView extends StatelessWidget {
                             Text(
                               "iPhone 15 Pro max",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
