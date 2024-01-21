@@ -6,8 +6,15 @@ class ProductProvider with ChangeNotifier {
   ApiService apiService = ApiService();
   List<Product> products = [];
 
-  Future<void> getProducts() async{
-     var res = await apiService.get(path: "products");
-     print(res);
+  Future<void> getProducts() async {
+    var res = await apiService.get(path: "products");
+    if (res != null) {
+      products = List.from(
+        res.map(
+          (i) => Product.fromJson(i),
+        ),
+      );
+    }
+
   }
 }
