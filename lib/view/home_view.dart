@@ -49,7 +49,9 @@ class HomeView extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.primaries[Random().nextInt(Colors.primaries.length)].shade50,
+                  color: Colors
+                      .primaries[Random().nextInt(Colors.primaries.length)]
+                      .shade50,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.05),
@@ -65,17 +67,19 @@ class HomeView extends StatelessWidget {
                       flex: 1,
                       child: Center(
                         child: CachedNetworkImage(
-                          imageUrl: "https://static0.xdaimages.com/wordpress/wp-content/uploads/2023/09/iphone-15-pro.png",
-
-                          placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
+                          imageUrl:
+                              "https://static0.xdaimages.com/wordpress/wp-content/uploads/2023/09/iphone-15-pro.png",
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                       ),
                     ),
                     Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(8),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,12 +92,37 @@ class HomeView extends StatelessWidget {
                               ),
                             ),
                             Text("description"),
-                            Text(
-                              "4300 บาท",
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "4300฿",
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                        size: 15,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.edit,
+                                        size: 15,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
                           ],
                         ),
