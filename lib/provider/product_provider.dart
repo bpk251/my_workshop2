@@ -58,6 +58,14 @@ class ProductProvider with ChangeNotifier {
     }
   }
 
+  Future<void> deleteProduct(int id) async {
+    var res = await apiService.delete(path: "product/$id");
+    if (res != null) {
+      await getProducts();
+      notifyListeners();
+    }
+  }
+
   setProductSelected(Product product) {
     productSelected = product;
   }

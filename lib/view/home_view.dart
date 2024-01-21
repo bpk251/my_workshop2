@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:my_workshop/model/product.dart';
 import 'package:my_workshop/provider/product_provider.dart';
 import 'package:my_workshop/view/input_form_view.dart';
 import 'package:provider/provider.dart';
@@ -142,7 +143,12 @@ class _HomeViewState extends State<HomeView> {
                                   Row(
                                     children: [
                                       IconButton(
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          _dialogBuilder(
+                                            context,
+                                            provider.products[index],
+                                          );
+                                        },
                                         icon: Icon(
                                           Icons.delete,
                                           color: Colors.red,
@@ -185,6 +191,44 @@ class _HomeViewState extends State<HomeView> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _dialogBuilder(BuildContext context, Product product) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Basic dialog title'),
+          content: const Text(
+            'A dialog is a type of modal window that\n'
+            'appears in front of app content to\n'
+            'provide critical information, or prompt\n'
+            'for a decision to be made.',
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Yes'),
+              onPressed: () async {
+                await context.read<ProductProvider>().deleteProduct(product.id!);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
