@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:my_workshop/view/input_form_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -68,7 +69,7 @@ class HomeView extends StatelessWidget {
                       child: Center(
                         child: CachedNetworkImage(
                           imageUrl:
-                              "https://static0.xdaimages.com/wordpress/wp-content/uploads/2023/09/iphone-15-pro.png",
+                          "https://static0.xdaimages.com/wordpress/wp-content/uploads/2023/09/iphone-15-pro.png",
                           placeholder: (context, url) =>
                               CircularProgressIndicator(),
                           errorWidget: (context, url, error) =>
@@ -114,7 +115,14 @@ class HomeView extends StatelessWidget {
                                       ),
                                     ),
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => InputFormView(),
+                                          ),
+                                        );
+                                      },
                                       icon: Icon(
                                         Icons.edit,
                                         size: 15,

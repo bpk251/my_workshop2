@@ -2,6 +2,7 @@ import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
 import 'package:flutter/material.dart';
 import 'package:my_workshop/view/home_view.dart';
+import 'package:my_workshop/view/input_form_view.dart';
 import 'package:my_workshop/view/profile_view.dart';
 import 'package:my_workshop/view/shop_view.dart';
 
@@ -49,7 +50,14 @@ class _AppViewState extends State<AppView> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => InputFormView(),
+                ),
+              );
+            },
             icon: Icon(Icons.add),
           ),
         ],
