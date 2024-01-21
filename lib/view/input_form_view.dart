@@ -40,108 +40,110 @@ class _InputFormViewState extends State<InputFormView> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextFormField(
-              controller: nameController,
-              maxLines: null,
-              minLines: 2,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    borderSide: BorderSide(color: Colors.orange),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    borderSide: BorderSide(color: Colors.orange),
-                  ),
-                  hintText: "Product Name",
-                  labelText: "Product Name"),
-            ),
-            SizedBox(height: 16),
-            TextFormField(
-              controller: imageController,
-              maxLines: null,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    borderSide: BorderSide(color: Colors.orange),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    borderSide: BorderSide(color: Colors.orange),
-                  ),
-                  hintText: "Product Image",
-                  labelText: "Product Image"),
-            ),
-            SizedBox(height: 16),
-            TextFormField(
-              controller: descriptionController,
-              maxLines: null,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    borderSide: BorderSide(color: Colors.orange),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    borderSide: BorderSide(color: Colors.orange),
-                  ),
-                  hintText: "Product Description",
-                  labelText: "Product Description"),
-            ),
-            SizedBox(height: 16),
-            TextFormField(
-              controller: priceController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    borderSide: BorderSide(color: Colors.orange),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    borderSide: BorderSide(color: Colors.orange),
-                  ),
-                  hintText: "Product Price",
-                  labelText: "Product Price"),
-            ),
-            SizedBox(height: 32),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (isUpdate == true) {
-                    context
-                        .read<ProductProvider>()
-                        .updateProducts(
-                          id: product!.id!,
-                          name: nameController.text,
-                          imageUrl: imageController.text,
-                          description: descriptionController.text,
-                          price: priceController.text,
-                        )
-                        .then(
-                          (value) => Navigator.pop(context),
-                        );
-                  } else {
-                    context
-                        .read<ProductProvider>()
-                        .addProducts(
-                          name: nameController.text,
-                          imageUrl: imageController.text,
-                          description: descriptionController.text,
-                          price: priceController.text,
-                        )
-                        .then(
-                          (value) => Navigator.pop(context),
-                        );
-                  }
-                },
-                child: Text("Save"),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextFormField(
+                controller: nameController,
+                maxLines: null,
+                minLines: 2,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      borderSide: BorderSide(color: Colors.orange),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      borderSide: BorderSide(color: Colors.orange),
+                    ),
+                    hintText: "Product Name",
+                    labelText: "Product Name"),
               ),
-            ),
-          ],
+              SizedBox(height: 16),
+              TextFormField(
+                controller: imageController,
+                maxLines: null,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      borderSide: BorderSide(color: Colors.orange),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      borderSide: BorderSide(color: Colors.orange),
+                    ),
+                    hintText: "Product Image",
+                    labelText: "Product Image"),
+              ),
+              SizedBox(height: 16),
+              TextFormField(
+                controller: descriptionController,
+                maxLines: null,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      borderSide: BorderSide(color: Colors.orange),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      borderSide: BorderSide(color: Colors.orange),
+                    ),
+                    hintText: "Product Description",
+                    labelText: "Product Description"),
+              ),
+              SizedBox(height: 16),
+              TextFormField(
+                controller: priceController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      borderSide: BorderSide(color: Colors.orange),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      borderSide: BorderSide(color: Colors.orange),
+                    ),
+                    hintText: "Product Price",
+                    labelText: "Product Price"),
+              ),
+              SizedBox(height: 32),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (isUpdate == true) {
+                      context
+                          .read<ProductProvider>()
+                          .updateProducts(
+                            id: product!.id!,
+                            name: nameController.text,
+                            imageUrl: imageController.text,
+                            description: descriptionController.text,
+                            price: priceController.text,
+                          )
+                          .then(
+                            (value) => Navigator.pop(context),
+                          );
+                    } else {
+                      context
+                          .read<ProductProvider>()
+                          .addProducts(
+                            name: nameController.text,
+                            imageUrl: imageController.text,
+                            description: descriptionController.text,
+                            price: priceController.text,
+                          )
+                          .then(
+                            (value) => Navigator.pop(context),
+                          );
+                    }
+                  },
+                  child: Text("Save"),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
