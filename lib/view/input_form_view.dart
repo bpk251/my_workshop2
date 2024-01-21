@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_workshop/model/product.dart';
+import 'package:my_workshop/provider/product_provider.dart';
+import 'package:provider/provider.dart';
 
 class InputFormView extends StatefulWidget {
   const InputFormView({super.key});
@@ -14,6 +17,18 @@ class _InputFormViewState extends State<InputFormView> {
   TextEditingController priceController = TextEditingController();
 
   @override
+  void initState() {
+    Product? product = context.read<ProductProvider>().productSelected;
+    if(product != null){
+      nameController.text = product.name??"";
+      imageController.text = product.imageUrl??"";
+      descriptionController.text = product.description??"";
+      priceController.text = product.price??"";
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -26,13 +41,15 @@ class _InputFormViewState extends State<InputFormView> {
           children: [
             TextFormField(
               controller: nameController,
+              maxLines: null,
+              minLines: 2,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(45.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
                     borderSide: BorderSide(color: Colors.orange),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(45.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
                     borderSide: BorderSide(color: Colors.orange),
                   ),
                   hintText: "Product Name",
@@ -41,13 +58,14 @@ class _InputFormViewState extends State<InputFormView> {
             SizedBox(height: 16),
             TextFormField(
               controller: imageController,
+              maxLines: null,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(45.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
                     borderSide: BorderSide(color: Colors.orange),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(45.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
                     borderSide: BorderSide(color: Colors.orange),
                   ),
                   hintText: "Product Image",
@@ -56,13 +74,14 @@ class _InputFormViewState extends State<InputFormView> {
             SizedBox(height: 16),
             TextFormField(
               controller: descriptionController,
+              maxLines: null,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(45.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
                     borderSide: BorderSide(color: Colors.orange),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(45.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
                     borderSide: BorderSide(color: Colors.orange),
                   ),
                   hintText: "Product Description",
@@ -71,13 +90,14 @@ class _InputFormViewState extends State<InputFormView> {
             SizedBox(height: 16),
             TextFormField(
               controller: priceController,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(45.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
                     borderSide: BorderSide(color: Colors.orange),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(45.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
                     borderSide: BorderSide(color: Colors.orange),
                   ),
                   hintText: "Product Price",

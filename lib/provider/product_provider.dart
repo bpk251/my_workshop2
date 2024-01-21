@@ -5,6 +5,7 @@ import 'package:my_workshop/service/api_service.dart';
 class ProductProvider with ChangeNotifier {
   ApiService apiService = ApiService();
   List<Product> products = [];
+  Product? productSelected;
 
   Future<void> getProducts() async {
     var res = await apiService.get(path: "products");
@@ -17,5 +18,9 @@ class ProductProvider with ChangeNotifier {
       notifyListeners();
     }
 
+  }
+
+  setProductSelected(Product product){
+    productSelected = product;
   }
 }

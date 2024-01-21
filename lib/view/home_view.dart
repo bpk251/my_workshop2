@@ -150,6 +150,11 @@ class _HomeViewState extends State<HomeView> {
                                       ),
                                       IconButton(
                                         onPressed: () {
+                                          context
+                                              .read<ProductProvider>()
+                                              .setProductSelected(
+                                                provider.products[index],
+                                              );
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
