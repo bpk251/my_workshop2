@@ -7,8 +7,6 @@ import 'package:my_workshop/view/input_form_view.dart';
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
-  //Testing123
-
   @override
   Widget build(BuildContext context) {
     return Padding(
