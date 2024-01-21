@@ -83,13 +83,20 @@ class _HomeViewState extends State<HomeView> {
                       Expanded(
                         flex: 1,
                         child: Center(
-                          child: CachedNetworkImage(
-                            imageUrl:
-                                provider.products[index].imageUrl??"",
-                            placeholder: (context, url) =>
-                                CircularProgressIndicator(),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              bottomLeft: Radius.circular(20),
+                            ),
+                            child: CachedNetworkImage(
+                              imageUrl: provider.products[index].imageUrl ?? "",
+                              placeholder: (context, url) =>
+                                  Center(child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                              height: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
@@ -102,19 +109,29 @@ class _HomeViewState extends State<HomeView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "iPhone 15 Pro max",
+                                provider.products[index].name ?? "",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
                                 ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              Text("description"),
+                              Text(
+                                provider.products[index].description ?? "",
+                                maxLines: 2,
+                                style: TextStyle(
+                                  color: Colors.black45,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "4300฿",
+                                    "${provider.products[index].price ?? ""}฿",
                                     style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
