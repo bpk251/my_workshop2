@@ -15,15 +15,16 @@ class _InputFormViewState extends State<InputFormView> {
   TextEditingController imageController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+  Product? product;
 
   @override
   void initState() {
-    Product? product = context.read<ProductProvider>().productSelected;
-    if(product != null){
-      nameController.text = product.name??"";
-      imageController.text = product.imageUrl??"";
-      descriptionController.text = product.description??"";
-      priceController.text = product.price??"";
+    product = context.read<ProductProvider>().productSelected;
+    if (product != null) {
+      nameController.text = product!.name ?? "";
+      imageController.text = product!.imageUrl ?? "";
+      descriptionController.text = product!.description ?? "";
+      priceController.text = product!.price ?? "";
     }
     super.initState();
   }
@@ -107,7 +108,20 @@ class _InputFormViewState extends State<InputFormView> {
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context
+                      .read<ProductProvider>()
+                      .updateProducts(
+                        id: product!.id!,
+                        name: nameController.text,
+                        imageUrl: imageController.text,
+                        description: descriptionController.text,
+                        price: priceController.text,
+                      )
+                      .then(
+                        (value) => Navigator.pop(context),
+                      );
+                },
                 child: Text("Save"),
               ),
             ),

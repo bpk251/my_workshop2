@@ -95,6 +95,7 @@ class _HomeViewState extends State<HomeView> {
                               errorWidget: (context, url, error) =>
                                   Icon(Icons.error),
                               height: double.infinity,
+                              width: double.infinity,
                               fit: BoxFit.cover,
                             ),
                           ),

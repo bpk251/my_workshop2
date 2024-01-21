@@ -17,10 +17,29 @@ class ProductProvider with ChangeNotifier {
       );
       notifyListeners();
     }
-
   }
 
-  setProductSelected(Product product){
+  Future<void> updateProducts({
+    required int id,
+    required String name,
+    required String imageUrl,
+    required String description,
+    required String price,
+  }) async {
+    var body = {
+      "name": name,
+      "image_url": imageUrl,
+      "description": description,
+      "price": price,
+    };
+    var res = await apiService.put(path: "product/$id", body: body);
+    if (res != null) {
+      await getProducts();
+      notifyListeners();
+    }
+  }
+
+  setProductSelected(Product product) {
     productSelected = product;
   }
 }
